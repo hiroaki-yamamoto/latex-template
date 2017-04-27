@@ -1,0 +1,19 @@
+#/bin/zsh
+
+latex_command="xelatex"
+
+rm -rf *.xbb *.aux *.dvi *.log *.bbl *.blg *.toc main.pdf **/*.xbb **/*.aux **/*.dvi **/*.log **/*.bbl **/*.blg **/*.toc
+
+if [ "${1}" = "bib" ];then
+    ${latex_command} main&&bibtex main&&${latex_command} main&&${latex_command} main
+else
+    ${latex_command} main&&${latex_command} main
+fi
+
+# if [ "${2}" = "mincho" -o "${1}" = "mincho" ];then
+#     dvipdfmx -f ptex-ipa main
+# else
+#     dvipdfmx main
+# fi
+
+chromium main.pdf
